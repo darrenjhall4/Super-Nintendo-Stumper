@@ -1,20 +1,20 @@
 body {
   background-image: url("../assets/images/SNES.jpg");
-  background-color: #cccccc;
+  background-color: black;
   font-family: 'Press Start 2P', cursive;
   margin: auto;
   width: 60%;
   height: 80%;
-  border: 3px solid rgb(175, 24, 24);
+  border: 3px dotted rgb(175, 24, 24);
   padding: 10px;
   text-align: center;
   margin-top: 25px;
   line-height: 2;
+  color: rgb(240, 233, 233);
 }
 
 .container-fluid-overall {
   margin: auto;
-  width: 50%;
   border: 3px solid #73AD21;
   padding: 10px;
 }
@@ -26,4 +26,10 @@ h1 {
 
 #instructions {
   margin: 20px;
+}
+
+#kanky {
+  width: 500px;
+  height: 300px;
+  position: 
 }
