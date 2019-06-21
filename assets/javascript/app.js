@@ -1,59 +1,5 @@
 var card = $("#main");
 
-var game = {
-  correct: 0,
-  incorrect: 0,
-  counter: 120,
-
-  countdown: function() {
-    game.counter--;
-    $("#counter-number").html(game.counter);
-    if (game.counter === 0) {
-      alert("Time's Up!");
-      game.done(); //NEED DONE FUNCTION
-    }
-  },
-
-  start: function() {
-
-    $("#instructions").hide();
-    $("#instructionsP").hide();
-    timer = setInterval(game.countdown, 1000);
-
-    $("#main").prepend(
-      "<h3>Time Remaining: <span id='counter-number'>120</span> Seconds </h3>"
-    );
-    $("#initialbutton").remove();
-
-    for (var i = 0; i < questions.length; i++) {
-      card.append("<h2>" + questions[i].question + "</h2>");
-
-      for (var j = 0; j < questions[i].answers.length; j++) {
-        card.append(
-          "<input type='radio' name='question-" +
-            i +
-            "'value-'" +
-            questions[i].answers[j] +
-            "" >
-            " + questions[i].answers[j]);"
-        );
-      }
-    }
-    card.append("<button id='done'>Done</button>");
-  }
-};
-
-$(document).on("click", "#initialbutton", function() {
-  game.start();
-});
-
-
-
-/*
-
-
-
-
 var question1 = {
   trivia: '1. What classic video game featured a completely separate game which allowed you to play in "Battle Mode"?',
   name: "firstquestion",
@@ -95,7 +41,7 @@ var question5 = {
 };
 
 var question6 = {
-  trivia: "6 What game based on a famous Disney movie allows you to play as the juvenile version of the main character in the early levels, then switches to a mature version in the end?",
+  trivia: "6. What game based on a famous Disney movie allows you to play as the juvenile version of the main character in the early levels, then switches to a mature version in the end?",
   name: "sixthquestion",
   options: ["Aladdin", "The Lion King", "Dumbo", "Lilo & Stitch"],
   answer: "The Lion King",
@@ -127,16 +73,85 @@ var question9 = {
 };
 
 var question10 = {
-  trivia: '10 What totally tubular game allowed you to time travel through different levels and "shred" bad guys?',
+  trivia: '10. What totally tubular game allowed you to time travel through different levels and "shred" bad guys?',
   name: "tenthquestion",
   options: [ "Super Mario World", "Turtles in Time", "Donkey Kong", "Pac Man"],
   answer: "Turtles in Time",
   wrong: ["Super Mario World", "Donkey Kong", "Pac Man"]
 };
 
+var questions = [question1, question2, question3, question4, question5, question6, question7, question8, question9, question10]
 
+$(document).on("click", "#initialbutton", function() {
+  game.start();
+  });
+
+$(document).on("click", "#done", function(){
+  game.done();
+})
+
+var game = {
+  correct: 0,
+  incorrect: 0,
+  counter: 120,
+
+  countdown: function() {
+    game.counter--;
+    $("#counter-number").html(game.counter);
+    if (game.counter === 0) {
+      alert("Time's Up!");
+      game.done(); //NEED DONE FUNCTION
+    }
+  },
+
+  start: function() {
+
+    $("#instructions").hide();
+    $("#instructionsP").hide();
+    timer = setInterval(game.countdown, 1000);
+
+    $("#main").prepend(
+      "<h2>Time Remaining: <span id='counter-number'>120</span> Seconds </h2>"
+    );
+    $("#initialbutton").remove();
+    
+    for (var i = 0; i < questions.length; i++) {
+      card.append("<h3>" + questions[i].trivia + "</h3>");
+
+      for (var j = 0; j < questions[i].options.length; j++) {
+        card.append(
+          "<p> <input type='radio' class='question" +
+            i + "' name='question" +
+            i +
+            "' value='" +
+            questions[i].options[j] + "'>" + questions[i].options[j] + "</p>");
+        }
+      }
+    card.append("<button id='done'>Done</button>");
+  },
+
+//start w/ inputs array, add each radio button clicked only after done button clicked, compare that array with answers
+//element that has class of questions.
+  done: function() {
+  var inputs = [$(".question0:checked").val(), $(".question1:checked").val(), $(".question2:checked").val()];
+  for (var i=0; i < inputs.length; i++) {
+    if (inputs[i] === questions[i].answer) {
+      game.correct++;
+    } else {
+      game.incorrect++;
+    }
+  }
+  console.log("correct" + game.correct);
+  console.log("incorrect:" + game.incorrect);
+  ///this.result(); NEED TO MAKE
+
+
+  }
+}
+
+
+/*
 questions: 
-
 1 What classic video game had a different game from the main game called "Battle Mode"? Super Mario Bro's 3, Donkey Kong, Mortal Kombat, F-Zero
 
 2 What is the name of the "airport" that would let you travel to different lands in Donkey Kong? Funky's Flights, Ape Aviation, Monkey Movement, Banana Boys Transportation
