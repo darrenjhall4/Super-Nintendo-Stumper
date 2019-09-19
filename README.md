@@ -1,2 +1,1 @@
-# TriviaGame
-Super Nintendo Stumper
+# Super Nintendo Stumper
